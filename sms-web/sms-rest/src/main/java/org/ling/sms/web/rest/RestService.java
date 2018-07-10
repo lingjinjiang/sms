@@ -1,5 +1,6 @@
 package org.ling.sms.web.rest;
 
+import org.ling.sms.configuration.SmsConfiguration;
 import org.ling.sms.datamanager.DataManager;
 import org.ling.sms.common.TelephoneInfo;
 import org.springframework.boot.*;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RestService {
 
   private DataManager dataManager;
+  private SmsConfiguration conf;
 
   public RestService() {
     this.dataManager = new DataManager();
@@ -32,7 +34,7 @@ public class RestService {
     response.setHeader("Access-Control-Allow-Origin", "*");
     LOG.info("+++++++++++++++ {}", phone.getPhoneNum());
     if (verifyCode == -1) {
-      verifyCode = dataManager.getCaptcha(Integer.toString(phone.getPhoneNum()));
+      verifyCode = dataManager.getCaptcha(phone.getPhoneNum());
     }
     return verifyCode;
 

@@ -1,18 +1,18 @@
 package org.ling.sms.common;
 
 public class TelephoneInfo {
-  public TelephoneInfo(int phoneNum) {
+  public TelephoneInfo(long phoneNum) {
     this.phoneNum = phoneNum;
   }
 
 
-  public int getPhoneNum() {
+  public long getPhoneNum() {
     return phoneNum;
   }
 
-  public void setPhoneNum(int phoneNum) {
+  public void setPhoneNum(long phoneNum) {
     this.phoneNum = phoneNum;
   }
 
-  int phoneNum;
+  long phoneNum;
 }

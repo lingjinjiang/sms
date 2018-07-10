@@ -11,6 +11,19 @@
 
     <groupId>org.ling.sms</groupId>
     <artifactId>sms-datamanager</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-provider</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
