@@ -1,6 +1,8 @@
 package org.ling.sms.configuration;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,13 +12,14 @@ public class TestConfiguration {
 
   @Test
   public void testConfiguation() {
-    SmsConfiguration conf = new SmsConfiguration();
+
+    Configuration conf;
     try {
-      conf.init();
+      conf = new PropertiesConfiguration("sms-site.ini");
+      assertEquals("111", conf.getString("aaa"));
     } catch (ConfigurationException e) {
       System.out.print("aaaaa");
     }
     System.out.println(System.getProperty("java.class.path"));
-    assertEquals("111", conf.getString("aaa"));
   }
 }

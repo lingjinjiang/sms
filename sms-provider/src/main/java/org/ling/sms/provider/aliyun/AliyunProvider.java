@@ -9,21 +9,47 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import org.apache.commons.configuration.Configuration;
+
+import org.ling.sms.common.AbstractService;
 import org.ling.sms.provider.common.Provider;
+import org.ling.sms.configuration.ConfigConstant;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class AliyunProvider implements Provider {
+public class AliyunProvider extends AbstractService implements Provider {
 
   //产品名称:云通信短信API产品,开发者无需替换
-  static final String product = "Dysmsapi";
+  private final String PRODUCT = "Dysmsapi";
   //产品域名,开发者无需替换
-  static final String domain = "dysmsapi.aliyuncs.com";
+  private final String DOMAIN = "dysmsapi.aliyuncs.com";
 
   // TODO 此处需要替换成开发者自己的AK(在阿里云访问控制台寻找)
-  static final String accessKeyId = "aaaaaa";
-  static final String accessKeySecret = "bbbbbbbbbbbbbbbbbb";
+  private String accessKeyId;
+
+  private String accessKeySecret;
+
+  private String signName;
+
+  private String templateCode;
+
+  private Configuration conf;
+
+  public AliyunProvider(Configuration conf) {
+    this.conf = conf;
+  }
+
+  public void serviceInit() {
+    this.accessKeyId = conf.getString(ConfigConstant.ALIYUN_ACCESSKEY_ID);
+    this.accessKeySecret = conf.getString(ConfigConstant.ALIYUN_ACCESSKEY_SECRET);
+    this.signName = conf.getString(ConfigConstant.ALIYUN_SIGN_NAME);
+    this.templateCode = conf.getString(ConfigConstant.ALIYUN_TEMPLATE_CDDE);
+  }
+
+  public void serviceStart() {
+
+  }
 
 
   public SendSmsResponse sendMessage(String phoneNum, String message) throws ClientException {
@@ -33,7 +59,7 @@ public class AliyunProvider implements Provider {
 
     //初始化acsClient,暂不支持region化
     IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", PRODUCT, DOMAIN);
     IAcsClient acsClient = new DefaultAcsClient(profile);
 
     //组装请求对象-具体描述见控制台-文档部分内容
@@ -41,9 +67,9 @@ public class AliyunProvider implements Provider {
     //必填:待发送手机号
     request.setPhoneNumbers(phoneNum);
     //必填:短信签名-可在短信控制台中找到
-    request.setSignName("lllll");
+    request.setSignName(signName);
     //必填:短信模板-可在短信控制台中找到
-    request.setTemplateCode("SMS_000000");
+    request.setTemplateCode(templateCode);
     //可选:模板中的变量替换JSON串,如模板内容为"亲爱的${name},您的验证码为${code}"时,此处的值为
     request.setTemplateParam("{\"code\":\"" + message + "\"}");
 
@@ -65,13 +91,13 @@ public class AliyunProvider implements Provider {
 
     //初始化acsClient,暂不支持region化
     IClientProfile profile = DefaultProfile.getProfile("cn-hangzhou", accessKeyId, accessKeySecret);
-    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", product, domain);
+    DefaultProfile.addEndpoint("cn-hangzhou", "cn-hangzhou", PRODUCT, DOMAIN);
     IAcsClient acsClient = new DefaultAcsClient(profile);
 
     //组装请求对象
     QuerySendDetailsRequest request = new QuerySendDetailsRequest();
     //必填-号码
-    request.setPhoneNumber("15000000000");
+    request.setPhoneNumber(phoneNum);
     //可选-流水号
     request.setBizId(bizId);
     //必填-发送日期 支持30天内记录查询，格式yyyyMMdd

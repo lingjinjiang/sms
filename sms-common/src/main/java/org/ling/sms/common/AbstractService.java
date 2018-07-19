@@ -10,9 +10,7 @@ public abstract class AbstractService implements Service {
     this.state = STATE.NEW;
   }
 
-  public void serviceInit() {
-
-  }
+  public abstract void serviceInit();
 
   public void init() {
     if (this.state.equals(STATE.NEW)) {
@@ -22,9 +20,7 @@ public abstract class AbstractService implements Service {
 
   }
 
-  public void serviceStart() {
-
-  }
+  public abstract void serviceStart();
 
   public void start() {
     if (this.state.equals(STATE.INITED)) {

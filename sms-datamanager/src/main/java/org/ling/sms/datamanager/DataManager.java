@@ -1,5 +1,6 @@
 package org.ling.sms.datamanager;
 
+import org.apache.commons.configuration.Configuration;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
 import org.ling.sms.provider.common.Provider;
@@ -17,8 +18,8 @@ public class DataManager extends AbstractService {
 
   private Provider provider;
 
-  public DataManager() {
-    this.provider = new AliyunProvider();
+  public DataManager(Configuration conf) {
+    this.provider = new AliyunProvider(conf);
   }
 
   @Override

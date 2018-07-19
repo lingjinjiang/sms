@@ -1,13 +1,16 @@
 package org.ling.sms.web.rest;
 
-import org.ling.sms.configuration.SmsConfiguration;
-import org.ling.sms.datamanager.DataManager;
-import org.ling.sms.common.TelephoneInfo;
+import org.apache.commons.configuration.Configuration;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 import org.springframework.boot.*;
 import org.springframework.boot.autoconfigure.*;
 import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.ling.sms.datamanager.DataManager;
+import org.ling.sms.common.TelephoneInfo;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,10 +20,16 @@ import javax.servlet.http.HttpServletResponse;
 public class RestService {
 
   private DataManager dataManager;
-  private SmsConfiguration conf;
+  private Configuration conf;
 
   public RestService() {
-    this.dataManager = new DataManager();
+    try {
+
+      this.conf = new PropertiesConfiguration("sms-site.ini");
+    } catch (ConfigurationException e) {
+      LOG.info("Init configuration failed.", e);
+    }
+    this.dataManager = new DataManager(conf);
   }
 
   private static final Logger LOG = LoggerFactory.getLogger(RestService.class);
