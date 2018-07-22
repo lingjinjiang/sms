@@ -1,12 +1,11 @@
 package org.ling.sms.datamanager;
 
-import org.apache.commons.configuration.Configuration;
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.aliyuncs.exceptions.ClientException;
-import org.ling.sms.provider.common.Provider;
+import org.apache.commons.configuration.Configuration;
 import org.ling.sms.common.AbstractService;
 import org.ling.sms.provider.aliyun.AliyunProvider;
-
+import org.ling.sms.provider.common.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,12 +13,40 @@ public class DataManager extends AbstractService {
 
   private static final Logger LOG = LoggerFactory.getLogger(DataManager.class);
 
-  private enum CAPTCHA {A,B,C,}
+  private enum CAPTCHA {A, B, C,}
 
   private Provider provider;
 
-  public DataManager(Configuration conf) {
+  private String name;
+
+  private DataManager(Configuration conf) {
     this.provider = new AliyunProvider(conf);
+  }
+
+  private DataManager(String name, Configuration conf) {
+    this(conf);
+    this.name = name;
+    this.provider = new AliyunProvider(conf);
+  }
+
+  private static DataManager dataManager;
+
+  public static DataManager createDataManager(String name, Configuration conf) {
+    if (dataManager == null) {
+      dataManager = new DataManager(name, conf);
+    }
+    return dataManager;
+  }
+
+  public static DataManager getInstance() {
+    if (dataManager == null) {
+      return null;
+    }
+    return dataManager;
+  }
+
+  public String getName() {
+    return name;
   }
 
   @Override
@@ -29,7 +56,7 @@ public class DataManager extends AbstractService {
 
   @Override
   public void serviceInit() {
-
+    provider.serviceInit();
   }
 
 
@@ -40,7 +67,7 @@ public class DataManager extends AbstractService {
       response = provider.sendMessage(Long.toString(phoneNum), Integer.toString(captcha));
       LOG.info("++++++++++++ {}", response.getCode());
     } catch (ClientException e) {
-      System.out.print(e.getStackTrace());
+      LOG.info("Failed to send message:", e);
     }
     return captcha;
   }

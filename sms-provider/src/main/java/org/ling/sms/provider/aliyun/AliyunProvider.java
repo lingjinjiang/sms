@@ -14,11 +14,14 @@ import org.apache.commons.configuration.Configuration;
 import org.ling.sms.common.AbstractService;
 import org.ling.sms.provider.common.Provider;
 import org.ling.sms.configuration.ConfigConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AliyunProvider extends AbstractService implements Provider {
+  private static final Logger LOG = LoggerFactory.getLogger(AliyunProvider.class);
 
   //产品名称:云通信短信API产品,开发者无需替换
   private final String PRODUCT = "Dysmsapi";

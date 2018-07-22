@@ -13,8 +13,8 @@ public abstract class AbstractService implements Service {
   public abstract void serviceInit();
 
   public void init() {
+    serviceInit();
     if (this.state.equals(STATE.NEW)) {
-      serviceInit();
       this.state = STATE.INITED;
     }
 
@@ -23,8 +23,8 @@ public abstract class AbstractService implements Service {
   public abstract void serviceStart();
 
   public void start() {
+    serviceStart();
     if (this.state.equals(STATE.INITED)) {
-      serviceStart();
       this.state = STATE.STARTED;
     }
   }

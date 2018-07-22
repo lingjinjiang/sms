@@ -21,20 +21,25 @@ public class RestService {
 
   private DataManager dataManager;
   private Configuration conf;
+  private String test = "aaa";
 
-  public RestService() {
+  public RestService(String test) {
     try {
-
+      this.test = test;
       this.conf = new PropertiesConfiguration("sms-site.ini");
     } catch (ConfigurationException e) {
       LOG.info("Init configuration failed.", e);
     }
-    this.dataManager = new DataManager(conf);
   }
 
   private static final Logger LOG = LoggerFactory.getLogger(RestService.class);
 
   private int verifyCode = -1;
+
+  @RequestMapping(path = "/")
+  public String home() {
+    return "hello world";
+  }
 
   @RequestMapping(path = "/code", method = RequestMethod.POST)
   @ResponseBody
@@ -63,6 +68,6 @@ public class RestService {
 
 
   public static void main(String[] args) throws Exception {
-    SpringApplication.run(RestService.class, args);
+    SpringApplication.run(RestService.class, "aaa");
   }
 }

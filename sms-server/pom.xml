@@ -10,33 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.ling.sms</groupId>
-    <artifactId>sms-web</artifactId>
-
-
+    <artifactId>sms-server</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-
-        <!-- 对象自动转json -->
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty.aggregate</groupId>
-            <artifactId>jetty-all-server</artifactId>
-            <version>8.2.0.v20160908</version>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-common</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ling.sms</groupId>
@@ -47,9 +25,18 @@
             <artifactId>sms-datamanager</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.google.inject</groupId>
-            <artifactId>guice</artifactId>
-            <version>4.0</version>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-datamanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-web</artifactId>
         </dependency>
     </dependencies>
+
+
 </project>
