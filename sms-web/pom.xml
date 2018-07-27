@@ -17,39 +17,42 @@
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-servlet</artifactId>
-            <version>1.19.4</version>
         </dependency>
-
-        <!-- 对象自动转json -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-guice</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-json</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>1.19.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.eclipse.jetty.aggregate</groupId>
-            <artifactId>jetty-all-server</artifactId>
-            <version>8.2.0.v20160908</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ling.sms</groupId>
-            <artifactId>sms-datamanager</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.ling.sms</groupId>
-            <artifactId>sms-datamanager</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
-            <version>4.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject.extensions</groupId>
+            <artifactId>guice-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty</groupId>
+            <artifactId>jetty-servlet</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-datamanager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ling.sms</groupId>
+            <artifactId>sms-datamanager</artifactId>
         </dependency>
     </dependencies>
 </project>

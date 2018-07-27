@@ -19,31 +19,16 @@ public class DataManager extends AbstractService {
 
   private String name;
 
-  private DataManager(Configuration conf) {
-    this.provider = new AliyunProvider(conf);
-  }
-
-  private DataManager(String name, Configuration conf) {
-    this(conf);
-    this.name = name;
-    this.provider = new AliyunProvider(conf);
-  }
+  private Configuration conf;
 
   private static DataManager dataManager;
 
-  public static DataManager createDataManager(String name, Configuration conf) {
-    if (dataManager == null) {
-      dataManager = new DataManager(name, conf);
-    }
-    return dataManager;
+  public DataManager(Configuration conf, Provider provider, String name) {
+    this.conf = conf;
+    this.provider = provider;
+    this.name = name;
   }
 
-  public static DataManager getInstance() {
-    if (dataManager == null) {
-      return null;
-    }
-    return dataManager;
-  }
 
   public String getName() {
     return name;
@@ -56,19 +41,19 @@ public class DataManager extends AbstractService {
 
   @Override
   public void serviceInit() {
-    provider.serviceInit();
+//    provider.serviceInit();
   }
 
 
   public int getCaptcha(long phoneNum) {
     int captcha = (int) (Math.random() * 10000);
     SendSmsResponse response;
-    try {
-      response = provider.sendMessage(Long.toString(phoneNum), Integer.toString(captcha));
-      LOG.info("++++++++++++ {}", response.getCode());
-    } catch (ClientException e) {
-      LOG.info("Failed to send message:", e);
-    }
+//    try {
+//      response = provider.sendMessage(Long.toString(phoneNum), Integer.toString(captcha));
+//      LOG.info("++++++++++++ {}", response.getCode());
+//    } catch (ClientException e) {
+//      LOG.info("Failed to send message:", e);
+//    }
     return captcha;
   }
 

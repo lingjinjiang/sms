@@ -1,14 +1,19 @@
 package org.ling.sms.web;
 
-import com.sun.jersey.spi.container.servlet.ServletContainer;
+import com.google.inject.servlet.GuiceFilter;
 import org.apache.commons.configuration.Configuration;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
 import org.ling.sms.common.AbstractService;
 import org.ling.sms.configuration.ConfigConstant;
+import org.ling.sms.datamanager.DataManager;
+import org.ling.sms.provider.common.Provider;
+import org.ling.sms.web.module.RestListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.servlet.DispatcherType;
+import java.util.EnumSet;
 
 
 public class RestService extends AbstractService {
@@ -17,29 +22,30 @@ public class RestService extends AbstractService {
 
   private Server server;
   private Configuration conf;
+  private Provider provider;
+  private DataManager dataManager;
 
-  public RestService(Configuration conf) {
+  public RestService(Configuration conf, Provider provider, DataManager dataManager) {
     this.conf = conf;
+    this.provider = provider;
+    this.dataManager = dataManager;
   }
 
   public void serviceInit() {
 
-    ServletHolder servlet = new ServletHolder(ServletContainer.class);
-    servlet.setInitParameter("com.sun.jersey.config.property.resourceConfigClass", "com.sun.jersey.api.core.PackagesResourceConfig");
-    servlet.setInitParameter("com.sun.jersey.config.property.packages", "org.ling.sms.web.api");
-    servlet.setInitParameter("com.sun.jersey.api.json.POJOMappingFeature", "true");
-
-    ServletContextHandler handler = new ServletContextHandler(ServletContextHandler.SESSIONS);
-    handler.setContextPath("/");
-    handler.addServlet(servlet, "/*");
-
-    this.server = new Server(conf.getInt(ConfigConstant.SMS_ADDRESS,ConfigConstant.DEFAULT_SMS_ADDRESS));
-    this.server.setHandler(handler);
+    this.server = new Server(this.conf.getInt(ConfigConstant.SMS_ADDRESS, ConfigConstant.DEFAULT_SMS_ADDRESS));
+    ServletContextHandler context = new ServletContextHandler();
+    context.setContextPath("");
+    server.setHandler(context);
+    context.addEventListener(new RestListener(this.conf, this.provider, this.dataManager));
+    context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+    context.addServlet(DispatcherServlet.class, "/");
   }
 
   public void serviceStart() {
     try {
       server.start();
+      server.join();
     } catch (Exception e) {
       LOG.error("Unable to start the web server: ", e);
     }

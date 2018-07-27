@@ -1,5 +1,7 @@
 package org.ling.sms.web.api;
 
+import com.google.inject.Inject;
+import org.apache.commons.configuration.Configuration;
 import org.ling.sms.datamanager.DataManager;
 
 import javax.ws.rs.GET;
@@ -11,8 +13,9 @@ public class ShortMessage {
 
   DataManager dataManager;
 
-  public ShortMessage() {
-    this.dataManager = DataManager.getInstance();
+  @Inject
+  public ShortMessage(DataManager dataManager) {
+    this.dataManager = dataManager;
   }
 
   @Path("/getCode/{id}")
@@ -22,6 +25,12 @@ public class ShortMessage {
       return "hello " + dataManager.getCaptcha(15062255934L);
     }
     return "hello " + id + id;
+  }
+
+  @Path("/test")
+  @GET
+  public String test() {
+    return "test " + dataManager.getName();
   }
 
 }
