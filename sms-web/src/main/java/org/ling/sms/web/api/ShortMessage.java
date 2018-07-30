@@ -1,7 +1,6 @@
 package org.ling.sms.web.api;
 
 import com.google.inject.Inject;
-import org.apache.commons.configuration.Configuration;
 import org.ling.sms.datamanager.DataManager;
 
 import javax.ws.rs.GET;

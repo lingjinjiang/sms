@@ -12,4 +12,5 @@ JAVA_BIN=${JAVA_HOME}/bin/java
 
 APP_OPTS="-Xms50m -Xmx100m"
 APP_CLASSPATH=${BASE_DIR}/*:${BASE_DIR}/conf:${BASE_DIR}/lib/*
-${JAVA_BIN} ${APP_OPTS} -cp ${APP_CLASSPATH} org.ling.sms.server.SmsServer
+${JAVA_BIN} ${APP_OPTS} -cp ${APP_CLASSPATH} org.ling.sms.server.SmsServer &
+echo $! > ${BASE_DIR}/SmsServer.pid

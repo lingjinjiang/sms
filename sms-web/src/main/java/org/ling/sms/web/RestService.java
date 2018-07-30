@@ -8,6 +8,7 @@ import org.ling.sms.common.AbstractService;
 import org.ling.sms.configuration.ConfigConstant;
 import org.ling.sms.datamanager.DataManager;
 import org.ling.sms.provider.common.Provider;
+import org.ling.sms.web.module.CORSFilter;
 import org.ling.sms.web.module.RestListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ public class RestService extends AbstractService {
     context.setContextPath("");
     server.setHandler(context);
     context.addEventListener(new RestListener(this.conf, this.provider, this.dataManager));
-    context.addFilter(GuiceFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
+    context.addFilter(CORSFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
     context.addServlet(DispatcherServlet.class, "/");
   }
 

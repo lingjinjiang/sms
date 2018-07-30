@@ -25,6 +25,7 @@
         <guice.version>4.0</guice.version>
         <jetty.version>8.2.0.v20160908</jetty.version>
         <jersey.version>1.19.4</jersey.version>
+        <http.version>4.5.2</http.version>
     </properties>
 
     <dependencyManagement>
@@ -98,6 +99,11 @@
                 <groupId>com.sun.jersey.contribs</groupId>
                 <artifactId>jersey-guice</artifactId>
                 <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${http.version}</version>
             </dependency>
             <dependency>
                 <groupId>junit</groupId>
