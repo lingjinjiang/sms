@@ -3,6 +3,9 @@ package org.ling.sms.web;
 import com.google.inject.servlet.GuiceFilter;
 import org.apache.commons.configuration.Configuration;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.session.HashSessionIdManager;
+import org.eclipse.jetty.server.session.HashSessionManager;
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.ling.sms.common.AbstractService;
 import org.ling.sms.configuration.ConfigConstant;
@@ -36,11 +39,14 @@ public class RestService extends AbstractService {
 
     this.server = new Server(this.conf.getInt(ConfigConstant.SMS_ADDRESS, ConfigConstant.DEFAULT_SMS_ADDRESS));
     ServletContextHandler context = new ServletContextHandler();
+    server.setSessionIdManager(new HashSessionIdManager());
     context.setContextPath("");
     server.setHandler(context);
     context.addEventListener(new RestListener(this.conf, this.provider, this.dataManager));
     context.addFilter(CORSFilter.class, "/*", EnumSet.allOf(DispatcherType.class));
     context.addServlet(DispatcherServlet.class, "/");
+    SessionHandler sessionHandler = new SessionHandler();
+    context.setSessionHandler(sessionHandler);
   }
 
   public void serviceStart() {

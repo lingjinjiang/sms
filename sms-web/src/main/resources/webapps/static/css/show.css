@@ -1,0 +1,54 @@
+table {
+  width: 100%;
+  padding: 10px;
+}
+
+.userInfoTd {
+  height: 50px;
+  border-bottom: 1px dashed #ababab;
+  font-weight: bold;
+}
+
+span {
+  font-weight: 400;
+}
+
+.detail {
+  /*height: 150px;*/
+  background: #ffffff;
+  border-radius: 5px 5px 5px 5px;
+  margin: 15px;
+}
+
+.bottom-dashed {
+  border-bottom: 1px dashed #ababab;
+}
+
+.result {
+  /*padding: 15px 0 0 15px;*/
+  font-size: 25px;
+  align-content: right;
+}
+
+.right-td {
+  text-align: right;
+}
+
+.other-name {
+  padding: 15px 0 0 15px;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.small_detail{
+  margin:0;
+  padding:0 15px;
+  font-size:20px;
+  line-height: 24px;
+  text-indent: 2em;
+}
+
+.detail-hr {
+  margin: 10px;
+  border-top: 1px dashed #ababab;
+}

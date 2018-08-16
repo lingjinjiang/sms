@@ -26,7 +26,7 @@ public class SmsServer extends AbstractService {
   public void serviceInit() {
     try {
 
-      this.conf = new PropertiesConfiguration("conf/sms-site.ini");
+      this.conf = new PropertiesConfiguration("sms-site.ini");
     } catch (ConfigurationException e) {
       LOG.error("Can not initialize the configuration: ", e);
     }
