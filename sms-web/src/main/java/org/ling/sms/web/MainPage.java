@@ -24,13 +24,13 @@ public class MainPage extends AbstarctPage {
       content.append("<meta charset=\"UTF-8\">");
       content.append("<title>输入信息</title>");
       content.append("\t<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n");
-      content.append("\t<link rel=\"stylesheet\" href=\"./static/css/weui.min.css\">\n");
-      content.append("\t<link rel=\"stylesheet\" href=\"./static/css/jquery-weui.min.css\">\n");
-      content.append("\t<link rel=\"stylesheet\" href=\"./static/css/index.css\">\n");
+      content.append("\t<link rel=\"stylesheet\" href=\"/static/css/weui.min.css\">\n");
+      content.append("\t<link rel=\"stylesheet\" href=\"/static/css/jquery-weui.min.css\">\n");
+      content.append("\t<link rel=\"stylesheet\" href=\"/static/css/index.css\">\n");
       content.append("</head>\n");
       content.append("<body>\n");
       content.append("\t<div class='title'>\n");
-      content.append("\t\t<img id='title' src=\"static/img/title.png\">\n");
+      content.append("\t\t<img id='title' src=\"/static/img/title.png\">\n");
       content.append("\t</div>\n");
       content.append("\t<div class=\"weui-cells weui-cells_form registerForm\">\n");
       content.append("\t\t<div class=\"weui-cell weui-cell_vcode customForm\">\n");
@@ -65,11 +65,11 @@ public class MainPage extends AbstarctPage {
       content.append("\t</div>\n");
       content.append("</body>\n");
       content.append("</html>\n");
-      content.append("<script src=\"./static/js/jquery.min.js\"></script>\n");
-      content.append("<script src=\"./static/js/jquery-weui.min.js\"></script>\n");
-      content.append("<script src=\"./static/js/jquery.cookie.js\"></script>\n");
-      content.append("<script src='./static/js/base.js'></script>\n");
-      content.append("<script src='./static/js/query.js'></script>\n");
+      content.append("<script src=\"/static/js/jquery.min.js\"></script>\n");
+      content.append("<script src=\"/static/js/jquery-weui.min.js\"></script>\n");
+      content.append("<script src=\"/static/js/jquery.cookie.js\"></script>\n");
+      content.append("<script src='/static/js/base.js'></script>\n");
+      content.append("<script src='/static/js/query.js'></script>\n");
 
       writer.write(content.toString());
 

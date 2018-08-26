@@ -9,10 +9,12 @@ import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.apache.commons.configuration.Configuration;
 import org.ling.sms.datamanager.DataManager;
 import org.ling.sms.provider.common.Provider;
+import org.ling.sms.web.DispatcherServlet;
+import org.ling.sms.web.ListPage;
+import org.ling.sms.web.MainPage;
 import org.ling.sms.web.api.Report;
 import org.ling.sms.web.api.ShortMessage;
 
-import javax.servlet.ServletConfig;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +38,11 @@ public class RestModule extends ServletModule {
     bind(Configuration.class).toInstance(this.conf);
     bind(Provider.class).toInstance(provider);
     bind(DataManager.class).toInstance(dataManager);
+    bind(MainPage.class);
+    bind(ListPage.class);
+    serve("/*").with(DispatcherServlet.class);
+
+    serve("/").with(DispatcherServlet.class);
 
     Map<String, String> params = new HashMap<String, String>();
     params.put(ResourceConfig.FEATURE_IMPLICIT_VIEWABLES, "true");

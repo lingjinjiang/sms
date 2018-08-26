@@ -37,14 +37,15 @@ $('#showTooltips').click(function(){
 	};
 	$.ajax({
 		type:'post',
-		url:'http://127.0.0.1:8080/report/list',
-//	url:'http://218.2.176.62:8099/WebService.asmx/GetLisInfo',
-		contentType:'application/x-www-form-urlencoded',
+		url: '/index',
+//		url:'http://127.0.0.1:8080/report/list',
+		contentType:'application/json',
 		data:JSON.stringify(send_data),
-    	dataType:'json',
+//		data:send_data,
+//    	dataType:'json',
 		success:function(data){
 			$.hideLoading();
-			window.location = './list.html?cardNo=' + cardNo + '&begDate='+ begDate+ '&endDate=' + endDate; 
+			window.location = './list';
 		},
 		error:function(a,b){
 			$.hideLoading();

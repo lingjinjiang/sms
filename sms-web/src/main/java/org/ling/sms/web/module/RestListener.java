@@ -19,7 +19,7 @@ public class RestListener extends GuiceServletContextListener {
     this.dataManager = dataManager;
   }
 
-  protected Injector getInjector() {
+  public Injector getInjector() {
     return Guice.createInjector(new RestModule(this.conf, this.provider, this.dataManager));
   }
 }
