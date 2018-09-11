@@ -60,15 +60,16 @@ public class ListPage extends AbstarctPage {
         content.append("<div id='container'>");
 
         List<ListResult.ReportInfo> reportInfos = listInfo.getLisInfo();
-        for(ListResult.ReportInfo report : reportInfos) {
+        for (ListResult.ReportInfo report : reportInfos) {
 
           String reportColor = "#38afdc";
           if (reportInfos.indexOf(report) % 2 == 0) {
             reportColor = "#ff9800";
           }
 
+          String href = "/detail?clinicCode=" + report.getClinicCode() + "&type=" + report.getType() + "&item=" + report.getItem();
           content.append("<div class=\"report\">");
-          content.append("  <a>");
+          content.append("  <a href=\"" + href + "\">");
           content.append("    <div class=\"report-title\" style=\"background: " + reportColor + "\">");
           content.append("      检验报告");
           content.append("    </div>");

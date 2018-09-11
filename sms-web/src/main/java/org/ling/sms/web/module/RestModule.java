@@ -12,6 +12,7 @@ import org.ling.sms.provider.common.Provider;
 import org.ling.sms.web.DispatcherServlet;
 import org.ling.sms.web.ListPage;
 import org.ling.sms.web.MainPage;
+import org.ling.sms.web.DetailPage;
 import org.ling.sms.web.api.Report;
 import org.ling.sms.web.api.ShortMessage;
 
@@ -40,6 +41,7 @@ public class RestModule extends ServletModule {
     bind(DataManager.class).toInstance(dataManager);
     bind(MainPage.class);
     bind(ListPage.class);
+    bind(DetailPage.class);
     serve("/*").with(DispatcherServlet.class);
 
     serve("/").with(DispatcherServlet.class);

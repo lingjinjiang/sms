@@ -38,7 +38,7 @@ public class DispatcherServlet extends HttpServlet {
     if ("/".equals(reqPath)) {
       resp.sendRedirect("/index");
     }
-
+    LOG.debug("Rep path:" + reqPath);
     if ("/index".equals(reqPath)) {
       String method = req.getMethod();
       if (method.equals("POST")) {
@@ -62,6 +62,13 @@ public class DispatcherServlet extends HttpServlet {
       ListPage listPage = injector.getInstance(ListPage.class);
       listPage.render(req, resp);
     }
+
+    if ("/detail".equals(reqPath)) {
+      DetailPage detailPage = injector.getInstance(DetailPage.class);
+      detailPage.render(req, resp);
+    }
+
+
 //    try {
 //      writer = resp.getWriter();
 //      writer.write("default servlet" + session.getId() + ' ' + req.getRequestURI());
