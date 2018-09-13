@@ -8,9 +8,21 @@ if [ "x${JAVA_HOME}" = "x" ]; then
   exit -1
 fi
 
+SMS_PID_FILE=${BASE_DIR}/SmsServer.pid
+
 JAVA_BIN=${JAVA_HOME}/bin/java
 
-APP_OPTS="-Xms50m -Xmx100m"
+#APP_OPTS="-Xms50m -Xmx100m"
 APP_CLASSPATH=${BASE_DIR}/*:${BASE_DIR}/conf:${BASE_DIR}/lib/*
-${JAVA_BIN} ${APP_OPTS} -cp ${APP_CLASSPATH} org.ling.sms.server.SmsServer &
-echo $! > ${BASE_DIR}/SmsServer.pid
+
+OPERATION=$1
+if [ $OPERATION = "start" ]; then
+  ${JAVA_BIN} ${APP_OPTS} -cp ${APP_CLASSPATH} org.ling.sms.server.SmsServer &
+  echo $! > $SMS_PID_FILE
+elif [ $OPERATION = "stop" ]; then
+  if [ ! -z $SMS_PID_FILE ]; then
+    kill $(cat $SMS_PID_FILE)
+  fi
+else
+  echo "Unknown operation"
+fi

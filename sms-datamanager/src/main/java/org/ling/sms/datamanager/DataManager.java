@@ -71,14 +71,6 @@ public class DataManager extends AbstractService {
   }
 
   public String getReportList(String condition) throws IOException {
-
-//    String condition = "{\n" +
-//            " \"cardNo\": \"0000001308\",\n" +
-//            " \"begDate\": \"2016/01/01\",\n" +
-//            " \"endDate\": \"2018/04/16\"\n" +
-//            "}";
-
-
     String queryUrl = this.baseUrl + "/GetLisInfo";
     return query(condition, queryUrl);
   }
@@ -90,7 +82,7 @@ public class DataManager extends AbstractService {
 
   private String query(String condition, String queryUrl) throws IOException {
     CloseableHttpResponse response = null;
-    LOG.info("The query condition {}", condition);
+    LOG.debug("The query condition {}", condition);
     try {
       HttpPost post = new HttpPost(queryUrl);
       StringEntity entity = new StringEntity(condition, Charset.forName("UTF-8"));
@@ -98,13 +90,12 @@ public class DataManager extends AbstractService {
       post.setEntity(entity);
       response = httpClient.execute(post);
       String result = EntityUtils.toString(response.getEntity(), Charset.forName("UTF-8"));
-      LOG.info("query result {}", result);
+      LOG.debug("query result {}", result);
       return result;
     } finally {
       if (response != null) {
         response.close();
       }
-//      httpClient.close();
     }
   }
 }

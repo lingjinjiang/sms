@@ -60,7 +60,7 @@ public class RestService extends AbstractService {
     // For static resources. e.g js, css.
     ServletContextHandler staticContext =
             new ServletContextHandler(collection, "/static");
-    URL resUrl = getClass().getClassLoader().getResource("webapps/");
+    URL resUrl = getClass().getClassLoader().getResource("webapps");
     staticContext.setResourceBase(resUrl.toString() + "/static");
     staticContext.addServlet(DefaultServlet.class, "/*");
 

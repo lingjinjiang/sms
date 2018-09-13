@@ -41,8 +41,9 @@ public class SmsServer extends AbstractService {
   }
 
   public void serviceStart() {
+    LOG.info("Start data manager");
     datamanager.start();
-    LOG.info("+++++++++++++++");
+    LOG.info("Start web server");
     webApp.start();
   }
 
@@ -50,15 +51,6 @@ public class SmsServer extends AbstractService {
     SmsServer sms = new SmsServer();
     sms.init();
     sms.start();
-    while (!Thread.interrupted()) {
-      try {
-
-        Thread.sleep(10000);
-      } catch (InterruptedException e) {
-
-      }
-    }
-    LOG.info("+++++++++++++++");
   }
 
 }
