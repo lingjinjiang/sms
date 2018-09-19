@@ -6,7 +6,7 @@
     <groupId>org.ling.sms</groupId>
     <artifactId>SmsProject</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <modules>
         <module>sms-common</module>
         <module>sms-datamanager</module>
