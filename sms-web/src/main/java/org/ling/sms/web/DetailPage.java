@@ -53,13 +53,81 @@ public class DetailPage extends AbstarctPage {
     int position = d.indexOf("}]}") + 3;
 
     content.append("<body>\n");
-    String userStr = d.substring(1, position);
-    renderUser(content, userStr);
 
+    String userStr = d.substring(1, position);
+    UserInfos userInfos = gson.fromJson(userStr, UserInfos.class);
     String detailStr = d.substring(position + 1, d.length() - 1);
-    renderDetail(content, detailStr, item);
+
+//    renderUser(content, userInfos);
+    if ("检验".equals(item)) {
+      CheckItems items = gson.fromJson(detailStr, CheckItems.class);
+      renderUser(content, userInfos);
+      renderDetail(content, items);
+    } else {
+      XRayItems items = gson.fromJson(detailStr, XRayItems.class);
+      userInfos.getUserInfo().get(0).setChekDate(items.getPacsDetial().get(0).getReportDate());
+      userInfos.getUserInfo().get(0).setDeptName("");
+      userInfos.getUserInfo().get(0).setLabel(items.getPacsDetial().get(0).getType());
+      userInfos.getUserInfo().get(0).setDoctor(items.getPacsDetial().get(0).getTrier());
+      renderUser(content, userInfos);
+      renderDetail(content, items);
+    }
+//    renderDetail(content, detailStr, item);
 
     content.append("</body>\n");
+  }
+
+  private void renderDetail(StringBuilder content, CheckItems items) {
+    content.append("<div id='detail'>");
+    for (CheckItems.CheckItem checkItem : items.getLisDetial()) {
+      String color = "#00AA00";
+      String flag = checkItem.getFlag();
+      String checkResult = checkItem.getResult();
+      if ("↑".equals(flag) || "↓".equals(flag)) {
+        color = "#FF0000";
+        checkResult = flag + ' ' + checkResult;
+      }
+
+      content.append("<div class='detail'>");
+      content.append("<table>");
+      content.append("<tr>");
+      content.append("<td class='bottom-dashed'><span class='result'>").
+              append(checkItem.getName()).append("</span></td>");
+      content.append("<td class='right-td bottom-dashed'><span class='result' style='color: " + color + ";'>").
+              append(checkResult).append("</span></td>");
+      content.append("</tr>");
+      content.append("<tr>");
+      content.append("<td><span>单位: ").
+              append(checkItem.getUnit()).append("</span></td>");
+      content.append("<td class='right-td'><span>参考值: ").
+              append(checkItem.getRange()).append("</span></td>");
+      content.append("</tr>");
+      content.append("</table>");
+      content.append("</div>");
+    }
+    content.append("</div>");
+  }
+
+  private void renderDetail(StringBuilder content, XRayItems items) {
+    content.append("<div id='detail'>");
+    for (XRayItems.XRayItem xRayItem : items.getPacsDetial()) {
+      content.append("<div class='other-detail'>");
+      content.append("<p class='other-name'>检查描述</p>");
+      content.append("<hr class='detail-hr'/>");
+      content.append("<p id='script' class='small_detail' style='text-indent: 2em'>").
+              append(xRayItem.getScript().replaceAll("\\r\\n", "").replaceAll(" ", "")).
+              append("</p>");
+      content.append("</div>");
+      content.append("<br/>");
+      content.append("<div class='other-detail'>");
+      content.append("<p class='other-name'>检查结论</p>");
+      content.append("<hr class='detail-hr'/>");
+      content.append("<p class='small_detail' style='padding-left: 2em'>").
+              append(xRayItem.getResult().replaceAll("\\r\\n", "<br/>")).
+              append("</p>");
+      content.append("</div>");
+    }
+    content.append("</div>");
   }
 
   private void renderDetail(StringBuilder content, String detailStr, String item) {
@@ -98,7 +166,7 @@ public class DetailPage extends AbstarctPage {
         content.append("<div class='other-detail'>");
         content.append("<p class='other-name'>检查描述</p>");
         content.append("<hr class='detail-hr'/>");
-        content.append("<p id='script' class='small_detail' style='text-indent: 2em'>").
+        content.append("<p id='script' class='small_detail' style='text-indent: 2em; padding-left: 0'>").
                 append(xRayItem.getScript().replaceAll("\\r\\n", "").replaceAll(" ", "")).
                 append("</p>");
         content.append("</div>");
@@ -106,18 +174,16 @@ public class DetailPage extends AbstarctPage {
         content.append("<div class='other-detail'>");
         content.append("<p class='other-name'>检查结论</p>");
         content.append("<hr class='detail-hr'/>");
-        content.append("<p class='small_detail'>").
+        content.append("<p class='small_detail' style='padding-left: 2em'>").
                 append(xRayItem.getResult().replaceAll("\\r\\n", "<br/>")).
                 append("</p>");
-        ;
         content.append("</div>");
       }
     }
     content.append("</div>");
   }
 
-  private void renderUser(StringBuilder content, String userStr) {
-    UserInfos userInfos = gson.fromJson(userStr, UserInfos.class);
+  private void renderUser(StringBuilder content, UserInfos userInfos) {
     for (UserInfos.User user : userInfos.getUserInfo()) {
       content.append("<div id='title' class='title'>报告详情</div>");
       content.append("<div id='userInfo'>");

@@ -59,32 +59,38 @@ public class ListPage extends AbstarctPage {
         content.append("<br/>");
         content.append("<div id='container'>");
 
-        List<ListResult.ReportInfo> reportInfos = listInfo.getLisInfo();
-        for (ListResult.ReportInfo report : reportInfos) {
+        if (listInfo != null) {
+          List<ListResult.ReportInfo> reportInfos = listInfo.getLisInfo();
+          for (ListResult.ReportInfo report : reportInfos) {
 
-          String reportColor = "#38afdc";
-          if (reportInfos.indexOf(report) % 2 == 0) {
-            reportColor = "#ff9800";
+            String reportColor = "#38afdc";
+            if (reportInfos.indexOf(report) % 2 == 0) {
+              reportColor = "#ff9800";
+            }
+
+            String href = "/detail?clinicCode=" + report.getClinicCode() + "&type=" + report.getType() + "&item=" + report.getItem();
+            content.append("<div class=\"report\">");
+            content.append("  <a href=\"" + href + "\">");
+            content.append("    <div class=\"report-title\" style=\"background: " + reportColor + "\">");
+            content.append("      检验报告");
+            content.append("    </div>");
+            content.append("    <div class=\"report-info\">");
+            content.append("      <div style=\"font-size: 25px; margin-right: 10px; padding-top: 10px;\">");
+            content.append(report.getType());
+            content.append("      </div>");
+            content.append("      <hr class=\"split\"/>");
+            content.append("      <div style=\"font-size: 15px; margin-right: 10px;\">");
+            content.append(report.checkDate);
+            content.append("      </div>");
+            content.append("    </div>");
+            content.append("  </a>");
+            content.append("</div>");
+            content.append("<hr style=\"margin: 3px; visibility: hidden;\"/>");
           }
-
-          String href = "/detail?clinicCode=" + report.getClinicCode() + "&type=" + report.getType() + "&item=" + report.getItem();
-          content.append("<div class=\"report\">");
-          content.append("  <a href=\"" + href + "\">");
-          content.append("    <div class=\"report-title\" style=\"background: " + reportColor + "\">");
-          content.append("      检验报告");
-          content.append("    </div>");
-          content.append("    <div class=\"report-info\">");
-          content.append("      <div style=\"font-size: 25px; margin-right: 10px; padding-top: 10px;\">");
-          content.append(report.getType());
-          content.append("      </div>");
-          content.append("      <hr class=\"split\"/>");
-          content.append("      <div style=\"font-size: 15px; margin-right: 10px;\">");
-          content.append(report.checkDate);
-          content.append("      </div>");
-          content.append("    </div>");
-          content.append("  </a>");
+        } else {
+          content.append("<div class=\"report\" style=\"font-size: 50px; margin-top: 75px; text-align: center;\">");
+          content.append("没有找到结果");
           content.append("</div>");
-          content.append("<hr style=\"margin: 3px; visibility: hidden;\"/>");
         }
 
         content.append("</div>");
