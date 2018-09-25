@@ -61,4 +61,5 @@ body,html{
 .title {
   text-align: center;
   padding-top: 30px;
+  width: 100%;
 }

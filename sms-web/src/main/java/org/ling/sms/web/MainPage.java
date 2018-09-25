@@ -30,7 +30,7 @@ public class MainPage extends AbstarctPage {
       content.append("</head>\n");
       content.append("<body>\n");
       content.append("\t<div class='title'>\n");
-      content.append("\t\t<img id='title' src=\"/static/img/title.png\">\n");
+      content.append("\t\t<img src=\"/static/img/title.png\" style=\"width: 80%\">\n");
       content.append("\t</div>\n");
       content.append("\t<div class=\"weui-cells weui-cells_form registerForm\">\n");
       content.append("\t\t<div class=\"weui-cell weui-cell_vcode customForm\">\n");
@@ -46,7 +46,7 @@ public class MainPage extends AbstarctPage {
       content.append("\t\t\t\t<label class=\"weui-label regiserTitle\">开始时间</label>\n");
       content.append("\t\t\t</div>\n");
       content.append("\t\t\t<div class=\"weui-cell__bd\">\n");
-      content.append("\t\t\t\t<input class=\"weui-input form-control\" type='text' name=\"begDate\" placeholder=\"请选择开始日期\" id='begDate' readonly=\"readonly\"/>\n");
+      content.append("\t\t\t\t<input class=\"weui-input form-control\" type='date' name=\"begDate\" placeholder=\"请选择开始日期\" id='begDate'/>\n");
       content.append("\t\t\t</div>\n");
       content.append("\t\t</div>\n");
       content.append("\t\t<div class=\"weui-cell weui-cell_vcode customForm\">\n");
@@ -54,7 +54,7 @@ public class MainPage extends AbstarctPage {
       content.append("\t\t\t\t<label class=\"weui-label regiserTitle\">结束时间</label>\n");
       content.append("\t\t\t</div>\n");
       content.append("\t\t\t<div class=\"weui-cell__bd\">\n");
-      content.append("\t\t\t\t<input class=\"weui-input form-control\" type='text' name=\"endDate\" placeholder=\"请选择结束日期\" id='endDate' readonly=\"readonly\"/>\n");
+      content.append("\t\t\t\t<input class=\"weui-input form-control\" type='date' name=\"endDate\" placeholder=\"请选择结束日期\" id='endDate'/>\n");
       content.append("\t\t\t</div>\n");
       content.append("\t\t</div>\n");
       content.append("\t</div>\n");

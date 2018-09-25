@@ -1,8 +1,8 @@
 $(document).ready(function(){
 	// alert(window.innerWidth);
 	$("#title").width(window.innerWidth * 0.8);
-	$("#begDate").calendar();
-	$("#endDate").calendar();
+	//$("#begDate").calendar();
+	//$("#endDate").calendar();
 })
 
 let startDate;
