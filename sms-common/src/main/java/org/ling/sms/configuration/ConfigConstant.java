@@ -18,4 +18,7 @@ public class ConfigConstant {
 
   public static final String ALIYUN_TEMPLATE_CDDE = SMS_PREFIX + ".aliyun.template.code";
 
+  public static final String DATA_ADDRESS = "sms.data.address";
+  public static final String DEFAULT_DATA_ADDRESS = "http://223.112.164.98:8070";
+
 }

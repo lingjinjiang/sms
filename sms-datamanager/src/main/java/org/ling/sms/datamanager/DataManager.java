@@ -11,6 +11,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.ling.sms.common.AbstractService;
+import org.ling.sms.configuration.ConfigConstant;
 import org.ling.sms.provider.common.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,7 +40,6 @@ public class DataManager extends AbstractService {
     this.provider = provider;
     this.name = name;
     this.httpClient = HttpClients.createDefault();
-    this.baseUrl = "http://218.2.176.62:8099/WebService.asmx";
   }
 
 
@@ -55,6 +55,9 @@ public class DataManager extends AbstractService {
   @Override
   public void serviceInit() {
 //    provider.serviceInit();
+    this.baseUrl =
+        this.conf.getString(ConfigConstant.DATA_ADDRESS, ConfigConstant.DEFAULT_DATA_ADDRESS);
+    LOG.info("Init Configuration: data server address {}", this.baseUrl);
   }
 
 
