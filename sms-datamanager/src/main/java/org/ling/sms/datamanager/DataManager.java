@@ -1,6 +1,7 @@
 package org.ling.sms.datamanager;
 
 import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import org.apache.commons.configuration.Configuration;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -56,7 +57,7 @@ public class DataManager extends AbstractService {
   public void serviceInit() {
 //    provider.serviceInit();
     this.baseUrl =
-        this.conf.getString(ConfigConstant.DATA_ADDRESS, ConfigConstant.DEFAULT_DATA_ADDRESS);
+            this.conf.getString(ConfigConstant.DATA_ADDRESS, ConfigConstant.DEFAULT_DATA_ADDRESS);
     LOG.info("Init Configuration: data server address {}", this.baseUrl);
   }
 
@@ -72,6 +73,17 @@ public class DataManager extends AbstractService {
 //    }
     return captcha;
   }
+
+  public void sendReportMessage(String phoneNum, String msgTemplate) {
+    SendSmsResponse response;
+    try {
+      response = provider.sendMessage(phoneNum, msgTemplate);
+      LOG.info("++++++ {}", response.getCode());
+    } catch (ClientException e) {
+      LOG.warn("Fail to send message", e);
+    }
+  }
+
 
   public String getReportList(String condition) throws IOException {
     String queryUrl = this.baseUrl + "/GetLisInfo";

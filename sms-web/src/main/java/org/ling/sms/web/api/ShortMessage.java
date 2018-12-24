@@ -1,14 +1,18 @@
 package org.ling.sms.web.api;
 
+import com.google.gson.Gson;
 import com.google.inject.Inject;
+import org.ling.sms.common.PatientInfo;
 import org.ling.sms.datamanager.DataManager;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 @Path("/sm")
 public class ShortMessage {
+
 
   DataManager dataManager;
 
@@ -26,10 +30,13 @@ public class ShortMessage {
     return "hello " + id + id;
   }
 
-  @Path("/test")
-  @GET
-  public String test() {
-    return "test " + dataManager.getName();
+  @Path("/sendReportMessage")
+  @POST
+  public String sendReportMessage(String patientInfoJson) {
+    Gson gson = new Gson();
+    PatientInfo patient = gson.fromJson(patientInfoJson, PatientInfo.class);
+    dataManager.sendReportMessage(patient.getPhoneNum(), patient.toTemplate());
+    return patient.getPhoneNum() + "\n" + patient.toTemplate();
   }
 
 }

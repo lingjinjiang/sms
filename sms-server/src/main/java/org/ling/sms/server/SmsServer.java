@@ -26,11 +26,12 @@ public class SmsServer extends AbstractService {
   public void serviceInit() {
     try {
 
-      this.conf = new PropertiesConfiguration("sms-site.ini");
+      this.conf = new PropertiesConfiguration("sms-conf.ini");
     } catch (ConfigurationException e) {
       LOG.error("Can not initialize the configuration: ", e);
     }
-    this.provider = new EmptyProvider();
+    this.provider = new AliyunProvider(conf);
+    this.provider.serviceInit();
 
     this.datamanager = new DataManager(this.conf, this.provider, "aaaaa");
     this.datamanager.init();
