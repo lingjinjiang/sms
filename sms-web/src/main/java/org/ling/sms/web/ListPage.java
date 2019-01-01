@@ -64,15 +64,20 @@ public class ListPage extends AbstarctPage {
           for (ListResult.ReportInfo report : reportInfos) {
 
             String reportColor = "#38afdc";
-            if (reportInfos.indexOf(report) % 2 == 0) {
-              reportColor = "#ff9800";
-            }
+//            if (reportInfos.indexOf(report) % 2 == 0) {
+//              reportColor = "#ff9800";
+//            }
 
+            String itemName = "检验";
+            if (!itemName.equals(report.getItem())) {
+              reportColor = "#ff9800";
+              itemName = "检查";
+            }
             String href = "/detail?clinicCode=" + report.getClinicCode() + "&type=" + report.getType() + "&item=" + report.getItem();
             content.append("<div class=\"report\">");
             content.append("  <a href=\"" + href + "\">");
             content.append("    <div class=\"report-title\" style=\"background: " + reportColor + "\">");
-            content.append("      检验报告");
+            content.append("      " + itemName + "报告");
             content.append("    </div>");
             content.append("    <div class=\"report-info\">");
             content.append("      <div style=\"font-size: 25px; margin-right: 10px; padding-top: 10px;\">");
