@@ -2,7 +2,7 @@ package org.ling.sms.web.api;
 
 import com.google.gson.Gson;
 import com.google.inject.Inject;
-import org.ling.sms.common.PatientInfo;
+import org.ling.sms.common.CommonMessage;
 import org.ling.sms.datamanager.DataManager;
 
 import javax.ws.rs.GET;
@@ -34,9 +34,9 @@ public class ShortMessage {
   @POST
   public String sendReportMessage(String patientInfoJson) {
     Gson gson = new Gson();
-    PatientInfo patient = gson.fromJson(patientInfoJson, PatientInfo.class);
-    dataManager.sendReportMessage(patient.getPhoneNum(), patient.toTemplate());
-    return patient.getPhoneNum() + "\n" + patient.toTemplate();
+    CommonMessage patient = gson.fromJson(patientInfoJson, CommonMessage.class);
+    dataManager.sendReportMessage(patient.getPhoneNum(), patient.getContent());
+    return patient.getPhoneNum() + "\n" + patient.getContent();
   }
 
 }
