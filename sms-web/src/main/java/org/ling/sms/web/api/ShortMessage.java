@@ -35,7 +35,7 @@ public class ShortMessage {
   public String sendReportMessage(String patientInfoJson) {
     Gson gson = new Gson();
     CommonMessage patient = gson.fromJson(patientInfoJson, CommonMessage.class);
-    dataManager.sendReportMessage(patient.getPhoneNum(), patient.getContent());
+    dataManager.sendReportMessage(patient.getPhoneNum(), patient.getContentAsJson());
     return patient.getPhoneNum() + "\n" + patient.getContent();
   }
 
